@@ -17,7 +17,7 @@
 -  localhost |      5436
 -  localhost |      5433
 -  localhost |      5435
-- (4 rows)
+
 
 # Postgres
 - The master is port forwarded to 5432. 
