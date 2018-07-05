@@ -3,7 +3,6 @@
 - This vagrant script will build a VM with 5 docker instances of postgres 9.6 citusdb.
 # Steps:
 - Ensure you have vagrant installed. If not, follow http://sourabhbajaj.com/mac-setup/Vagrant/README.html
-- clone this repo
 - cd into citus-vm-setup directory 
 - execute: vagrant up
 - when up,  vagrant ssh 
