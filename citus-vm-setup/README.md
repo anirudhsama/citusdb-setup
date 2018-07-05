@@ -1,4 +1,4 @@
-# Vagrant Citus DB demo 
+# Vagrant Citus DB 
 (Patched from : https://github.com/hung135/vagrant_citusdb)
 - This vagrant script will build a VM with 5 docker instances of postgres 9.6 citusdb.
 # Steps:
