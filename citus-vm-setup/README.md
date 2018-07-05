@@ -11,12 +11,12 @@
 - execute: psql -h localhost -U postgres -c "SELECT * FROM master_get_active_worker_nodes();"
 - Should see nodes like:
 ```
-- node_name | node_port 
-- -----------+-----------
--  localhost |      5434
--  localhost |      5436
--  localhost |      5433
--  localhost |      5435
+node_name | node_port 
+-----------+-----------
+ localhost |      5434
+ localhost |      5436
+ localhost |      5433
+ localhost |      5435
 ```
 
 # Postgres
