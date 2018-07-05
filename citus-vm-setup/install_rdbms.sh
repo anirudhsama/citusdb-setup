@@ -7,16 +7,27 @@ docker build -t postgrescitus .
       # install locally sowe can have client tools 
       sudo apt-get -y install postgresql-client-9.6 libpq5 pgdg-keyring postgresql-client-common
 
+
       # preload citus extension
       #sudo pg_conftool 9.6 main set shared_preload_libraries citus
-      docker run -d -p 5432:5432 --name master postgrescitus
-      docker run -d -p 5433:5432 postgrescitus
-      docker run -d -p 5434:5432 postgrescitus
-      docker run -d -p 5435:5432 postgrescitus
-      docker run -d -p 5436:5432 postgrescitus
-      # because Master is port forward to 192.168.33.11 5432 from above
-     psql -h localhost -U postgres -c "SELECT * from master_add_node('localhost', 5433);"
-     psql -h localhost -U postgres -c "SELECT * from master_add_node('localhost', 5434);"
-     psql -h localhost -U postgres -c "SELECT * from master_add_node('localhost', 5435);"
-     psql -h localhost -U postgres -c "SELECT * from master_add_node('localhost', 5436);"
+      docker run -d  --name master postgrescitus
+      master_id=$(docker ps -aq)
+      docker run -d  postgrescitus
+      docker run -d  postgrescitus
+      docker run -d  postgrescitus
+      docker run -d  postgrescitus
+
+      container_ids=$(docker ps | grep citus | grep -o -e '^\S*'| grep -v "${master_id}")
+
+      master_ip=$(docker inspect --format="{{ .NetworkSettings.IPAddress }}" $master_id)
+
+	for id in $container_ids
+	do
+    		name=$(docker inspect --format="{{ .Name }}" $id)
+    		ip=$(docker inspect --format="{{ .NetworkSettings.IPAddress }}" $id)
+
+     		psql -h "${master_ip}" -U postgres -c "SELECT * from master_add_node('"${ip}"', 5432)"
+	done
+
+
 
