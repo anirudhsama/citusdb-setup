@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
-
+  config.cache.auto_detect = true
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/xenial64"
@@ -110,6 +110,9 @@ sudo service smbd restart
     SHELL
      config.vm.provision "file", source: "Dockerfile", destination: "Dockerfile"
      config.vm.provision "file", source: "pg_hba.conf", destination: "pg_hba.conf"
+     config.vm.provision "file", source: "users.csv", destination: "users.csv"
+     config.vm.provision "file", source: "events.csv", destination: "events.csv"
+     config.vm.provision "file", source: "load_github_events_and_users.sql", destination: "load_github_events_and_users.sql"
      config.vm.provision "shell", path: "install_docker.sh"
      config.vm.provision "shell", path: "install_rdbms.sh"
      config.vm.provision "shell", path: "install_webmin.sh"

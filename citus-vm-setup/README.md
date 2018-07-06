@@ -1,7 +1,7 @@
 # Vagrant Citus DB 
 (Patched from : https://github.com/hung135/vagrant_citusdb)
-- This vagrant script will build a VM with 5 docker instances of postgres 9.6 citusdb.
-# Steps:
+
+# Steps to set-up vagrant machine:
 - Ensure you have vagrant installed. If not, follow http://sourabhbajaj.com/mac-setup/Vagrant/README.html
 - cd into citus-vm-setup directory 
 - execute: vagrant up
@@ -19,6 +19,9 @@ node_name | node_port
  localhost |      5435
 ```
 
-# Postgres
-- The master is port forwarded to 5432. 
-- Workers are port fowarded to 5433,5434,5435,5436
+Steps to load data in citus (master)coordinator and workers:
+- execute: docker ps
+- get the container id for master node
+- use this container id to fetch the ip
+- to get IP of coordinator node : docker inspect --format="{{ .NetworkSettings.IPAddress }}" <pass_the_container_id>
+- Run : psql -h <pass_the_IP> -U postgres -a -f load_github_events_and_users.sql
