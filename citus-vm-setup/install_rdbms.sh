@@ -10,7 +10,7 @@ docker build -t postgrescitus .
 
       # preload citus extension
       #sudo pg_conftool 9.6 main set shared_preload_libraries citus
-      docker run -d  --name master postgrescitus
+      docker run -d  --name master  -p 5432:5432 postgrescitus
       master_id=$(docker ps -aq)
       docker run -d  postgrescitus
       docker run -d  postgrescitus
