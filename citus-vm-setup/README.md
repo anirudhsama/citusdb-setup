@@ -25,3 +25,7 @@ Steps to load data in citus (master)coordinator and workers:
 - use this container id to fetch the ip
 - to get IP of coordinator node : docker inspect --format="{{ .NetworkSettings.IPAddress }}" <pass_the_container_id>
 - Run : psql -h <pass_the_IP> -U postgres -a -f load_github_events_and_users.sql
+
+	This loads good amount of data in citus workers. To see distribution across nodes:
+	Run : select nodename, count(shardid) from pg_dist_node left join pg_dist_shard_placement using (nodename) group by nodename order by count desc;
+
