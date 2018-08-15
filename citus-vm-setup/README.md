@@ -18,3 +18,5 @@ node_name | node_port
  localhost |      5433
  localhost |      5435
 ```
+
+- cd /vagrant/ to get access to files that load data in db
