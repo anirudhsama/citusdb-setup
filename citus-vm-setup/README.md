@@ -4,6 +4,9 @@
 # Steps to set-up vagrant machine:
 - Ensure you have vagrant installed. If not, follow http://sourabhbajaj.com/mac-setup/Vagrant/README.html
 - cd into citus-vm-setup directory 
+- vagrant plugin install vagrant-disksize
+- vagrant plugin install vagrant-cachier
+- vagrant plugin install vagrant-scp
 - execute: vagrant up
 - when up,execute: vagrant ssh 
 - inside vargrant vm, execute : sudo su ubuntu
